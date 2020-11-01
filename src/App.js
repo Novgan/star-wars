@@ -1,13 +1,19 @@
-import { Route } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import './App.css';
 import CardContainer from './components/Card/CardContainer';
-import Planet from './components/Planet/Planet';
+import NotFoundComponent from './components/Common/NotFound/NotFound';
+import PlanetContainer from './components/Planet/PlanetContainer';
 
 const App = () => {
   return (
     <>
-      <Route exact path="/" render={() => <CardContainer />} />
-      <Route path="/planet/:id" render={() => <Planet />} />
+      <Switch>
+        <Route path="/planet/:id" exact={true} render={() => <PlanetContainer />} />
+        <Route path="/:page?" exact={true} render={() => <CardContainer />} />
+        <Route render={() => <NotFoundComponent />} />
+      </Switch>
     </>
   );
 }

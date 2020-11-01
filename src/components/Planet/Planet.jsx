@@ -1,34 +1,28 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { requestCurrentPlanet } from "../../Redux/app-reducer";
-import Preloader from "../Common/Preloader";
+import React from "react";
+import defaultImage from '../../assets/images/defaultPlanet.jpg';
+import CustomImage from "../Common/Image/Image";
+import Preloader from "../Common/Preloader/Preloader";
 import classes from './planet.module.css';
 
 const Planet = props => {
-
-    useEffect(() => {
-        let id = props.match.params.id;
-        props.requestCurrentPlanet(id);
-    }, [])
-
-    return (
-        <div>
-            <div>Name: {props.currentPlanet.name}</div>
-            <div>Rotation_period: {props.currentPlanet.rotation_period}</div>
-            <div>Climate: {props.currentPlanet.climate}</div>
-            <div>Gravity: {props.currentPlanet.gravity}</div>
-            <div>Terrain: {props.currentPlanet.terrain}</div>
-            <div>Population: {props.currentPlanet.population}</div>
-            {/* <div>Residents: {props.currentPlanet.residents}</div> */}
+    return <>
+        {!props.currentPlanet.info || !props.currentPlanet.residentsName ? <Preloader /> : <div className={classes.planet}>
+            <CustomImage className={classes.planet__img} src={`https://starwars-visualguide.com/assets/img/planets/${props.id}.jpg`} srcOnError={defaultImage} alt={props.currentPlanet.info.name} />
+            <ul className={classes.planet__description}>
+                <li>Name: <span>{props.currentPlanet.info.name}</span></li>
+                <li>Rotation_period: <span>{props.currentPlanet.info.rotation_period}</span></li>
+                <li>Climate: <span>{props.currentPlanet.info.climate}</span></li>
+                <li>Gravity: <span>{props.currentPlanet.info.gravity}</span></li>
+                <li>Terrain: <span>{props.currentPlanet.info.terrain}</span></li>
+                <li>Population: <span>{props.currentPlanet.info.population}</span></li>
+                <li>Residents: <ul>
+                    {props.currentPlanet.residentsName.map((u, i) => <li key={i}>{u}</li>)}</ul>
+                </li>
+            </ul>
         </div>
-    )
+        }
+    </>
 }
 
-const mapStateToProps = state => ({
-    currentPlanet: state.app.currentPlanet
-})
 
-let WithUrlDataContainerComponent = withRouter(Planet);
-
-export default connect(mapStateToProps, { requestCurrentPlanet })(WithUrlDataContainerComponent);
+export default Planet;

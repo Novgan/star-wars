@@ -1,10 +1,13 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunkMiddleware from "redux-thunk"
-import appReducer from "./app-reducer"
-
+import paginationReducer from "./pagination-reducer"
+import planetReducer from "./planet-reducer"
+import cardReducer from "./card-reducer";
 
 let reducers = combineReducers({
-    app: appReducer
+    planets: cardReducer,
+    currentPlanet: planetReducer,
+    pagination: paginationReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
