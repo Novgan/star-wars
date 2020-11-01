@@ -1,8 +1,22 @@
-.loader{
-    position: fixed;
-    width: 100%;
+.notFound {
+    text-align: center;
+    width: 100vw;
+    margin-top: 20px;
+    left: 0;
+}
+
+.notFound__img {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.notFound__text {
+    margin-top: 20px;
+    color: white;
+    font-size: 50px;
+}
+
+@media screen and (max-width: 981px) {
+    .notFound__img {
+        width: 80vw;
+    }
 }

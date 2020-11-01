@@ -13,9 +13,9 @@
 }
 
 .planet__description {
+    overflow: auto;
     color: white;
     font-size: 24px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -27,5 +27,8 @@
         grid-template-columns: 100%;
         grid-template-rows: 45vh 45vh;
         grid-gap: 0;
+    }
+    .planet__description{
+        font-size: 18px;
     }
 }

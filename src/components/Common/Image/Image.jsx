@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const CustomImage = ({ src, srcOnError, ...rest }) => {
-    const [srcImg, setSrcImg] = useState(null);
-    
-    const onError = () => {
-        setSrcImg(srcOnError);
-    };
 
-    if (srcImg) {
-        return <img src={srcImg} {...rest} />;
-    } else {
-        return <img src={src} onError={onError} {...rest} />;
+    let onError = (e) => {
+        e.target.src = srcOnError
     }
+
+    return <img src={src} onError={(e) => onError(e)} {...rest} />;
 };
 
 export default CustomImage;

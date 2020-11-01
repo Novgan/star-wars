@@ -1,5 +1,7 @@
 body{
     background-image: url("./assets/images/background.jpg");
+    margin: 0;
+    font-family: fantasy;
 }
 
 a {

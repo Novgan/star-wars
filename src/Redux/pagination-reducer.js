@@ -1,5 +1,3 @@
-import { starWarsAPI } from "../api/api";
-
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 let initialState = {

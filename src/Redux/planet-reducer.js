@@ -2,6 +2,7 @@ import { starWarsAPI } from "../api/api";
 
 const INITIALIZED_CURRENT_PLANET = 'INITIALIZED_CURRENT_PLANET';
 const INITIALIZED_RESIDENTS = 'INITIALIZED_RESIDENTS';
+const CLEAR_STORE = 'CLEAR_STORE';
 
 
 let initialState = {
@@ -29,6 +30,14 @@ const planetReducer = (state = initialState, action) => {
                     residentsName: action.residents
                 },
             };
+        case CLEAR_STORE:
+            return {
+                ...state,
+                currentPlanet: {
+                    info: undefined,
+                    residentsName: undefined
+                },
+            };
         default:
             return state;
     }
@@ -36,15 +45,23 @@ const planetReducer = (state = initialState, action) => {
 
 export const initializedCurrentPlanet = currentPlanet => ({ type: INITIALIZED_CURRENT_PLANET, currentPlanet });
 export const initializedResidents = residents => ({ type: INITIALIZED_RESIDENTS, residents });
+export const clearStore = () => ({ type: CLEAR_STORE });
 
 export const requestCurrentPlanetThunkCreator = (id) => {
     return dispatch => {
-        starWarsAPI.getCurrentPlanet(id).then(currentPlanet => {
-            dispatch(initializedCurrentPlanet(currentPlanet));
-            starWarsAPI.getResidents(currentPlanet.residents).then(residentsName => {
-                dispatch(initializedResidents(residentsName));
+        starWarsAPI.getCurrentPlanet(id)
+            .then(currentPlanet => {
+                dispatch(initializedCurrentPlanet(currentPlanet));
+                starWarsAPI.getResidents(currentPlanet.residents)
+                    .then(residentsName => { dispatch(initializedResidents(residentsName)) })
+                    .catch(erorr => {
+                        dispatch(initializedResidents([null]));
+                        console.error(erorr);
+                    })
+            }).catch(erorr => {
+                dispatch(initializedCurrentPlanet(null));
+                console.error(erorr);
             })
-        })
     }
 }
 

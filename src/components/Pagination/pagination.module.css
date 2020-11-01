@@ -1,9 +1,53 @@
-.wrapper>a{
-    padding-right: 20px;
-    border: 1px solid red;
+.wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+} 
+
+.arrowLeft{
+    width: 0; 
+    height: 0; 
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent; 
+    border-right:14px solid white; 
+    margin: 0 10px;
 }
 
-.wrapper{
-    text-align: center;
-    margin: 40px 0;
+.arrowRight{
+    width: 0; 
+    height: 0; 
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent; 
+    border-left:14px solid white; 
+    margin: 0 10px;
+}
+
+.disableArrow{
+    pointer-events: none;    
+    border-right-color: grey; 
+    opacity: 0.5;
+}
+
+.pagesList>a {
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagesList>a:hover:not(.selectedPage) {
+    background-color: #ddd;
+}
+
+.selectedPage{
+    pointer-events: none;      
+    background-color: grey;
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 614px) {
+    .but{
+        display: none;
+    }
 }

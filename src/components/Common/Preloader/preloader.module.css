@@ -1,7 +1,7 @@
 .loader{
     top: 0;
     left: 0;
-    background-color: white;
+    background-image: url("../../../assets/images/background.jpg");
     z-index: 999;
     position: fixed;
     width: 100%;
